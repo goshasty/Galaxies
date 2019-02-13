@@ -208,6 +208,25 @@ namespace Console_app
             string[] s = System.IO.File.ReadAllLines(file);
             for (int i = 1; i < s.Length; i++)
             {
+                string[] values = s[i].Split('\t');
+                string ra = values[0].Replace('.', ','); // f
+                string dec = values[1].Replace('.', ','); // g
+                string red_shift = values[2].Replace('.', ',');
+                string objid = values[3].Replace('.', ',');
+                string mas = values[4].Replace('.', ',');
+
+                double r = 300000.0 / 66.93 * double.Parse(red_shift);
+
+                const double rad_from_grad = Math.PI / 180.0;
+                double x = r * Math.Cos(double.Parse(dec) * Math.PI / 180.0) * Math.Cos(double.Parse(ra) * rad_from_grad);
+                double y = r * Math.Cos(double.Parse(dec) * Math.PI / 180.0) * Math.Sin(double.Parse(ra) * rad_from_grad);
+                double z = r * Math.Sin(double.Parse(dec) * rad_from_grad);
+                sw.WriteLine(x + " " + y + " " + z + " " + objid + " " + mas);
+                sh.Add(new Circle(double.Parse(ra), double.Parse(dec), double.Parse(red_shift)));
+
+                #region commented 
+                /*
+
                 int j = 0;
                 while (s[i][j] == ' ')
                 {
@@ -269,6 +288,8 @@ namespace Console_app
                 double z = r * System.Math.Sin(double.Parse(g) * System.Math.PI / 180.0);
                 sw.WriteLine(x + " " + y + " " + z + " " + objid + " " + mas);
                 sh.Add(new Circle(double.Parse(f), double.Parse(g), double.Parse(cr)));
+            */
+            #endregion
             }
             sw.Close();
             file = "Coordinates.txt";

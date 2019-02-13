@@ -66,84 +66,88 @@ namespace Galaxies
             {
 
                 string[] values = s[i].Split('\t');
-                string f = values[0].Replace('.', ',');
-                string g = values[1].Replace('.', ',');
-                string cr = values[2].Replace('.', ',');
+                string ra = values[0].Replace('.', ','); // f
+                string dec = values[1].Replace('.', ','); // g
+                string red_shift = values[2].Replace('.', ',');
                 string objid = values[3].Replace('.', ',');
                 string mas = values[4].Replace('.', ',');
 
+                double r = 300000.0 / 66.93 * double.Parse(red_shift);
+
+                const double rad_from_grad = Math.PI / 180.0;
+                double x = r * Math.Cos(double.Parse(dec) * Math.PI / 180.0) * Math.Cos(double.Parse(ra) * rad_from_grad);
+                double y = r * Math.Cos(double.Parse(dec) * Math.PI / 180.0) * Math.Sin(double.Parse(ra) * rad_from_grad);
+                double z = r * Math.Sin(double.Parse(dec) * rad_from_grad);
+                sw.WriteLine(x + " " + y + " " + z + " " + objid + " " + mas);
+                sh.Add(new Circle(double.Parse(ra), double.Parse(dec), double.Parse(red_shift)));
+
+                #region commented 
+                /*
+                int j = 0;
+                while (s[i][j] == ' ')
+                {
+                    j++;
+                }
+                int k = j;
+                while (s[i][k] != ' ')
+                {
+                    k++;
+                }
+                string f = s[i].Substring(j, k - j);
+                j = k;
+                while (s[i][j] == ' ')
+                {
+                    j++;
+                    k++;
+                }
+                while (s[i][k] != ' ')
+                {
+                    k++;
+                }
+                string g = s[i].Substring(j, k - j);
+                j = k;
+                while (s[i][j] == ' ')
+                {
+                    j++;
+                    k++;
+                }
+                while (s[i][k] != ' ')
+                {
+                    k++;
+                }
+                string cr = s[i].Substring(j, k - j);
+                j = k;
+                while (s[i][j] == ' ')
+                {
+                    j++;
+                    k++;
+                }
+                while (s[i][k] != ' ')
+                {
+                    k++;
+                }
+                string objid = s[i].Substring(j, k - j);
+                j = k;
+                while (s[i][j] == ' ')
+                {
+                    j++;
+                    k++;
+                }
+                while (k < s[i].Length && s[i][k] != ' ')
+                {
+                    k++;
+                }
+                string mas = s[i].Substring(j, k - j);
                 double r = 300000.0 / 66.93 * double.Parse(cr);
                 double x = r * System.Math.Cos(double.Parse(g) * System.Math.PI / 180.0) * System.Math.Cos(double.Parse(f) * System.Math.PI / 180.0);
                 double y = r * System.Math.Cos(double.Parse(g) * System.Math.PI / 180.0) * System.Math.Sin(double.Parse(f) * System.Math.PI / 180.0);
                 double z = r * System.Math.Sin(double.Parse(g) * System.Math.PI / 180.0);
+
+                double x, y, z;
+                get_values_from_string(s[i], out x, out y, out z);
                 sw.WriteLine(x + " " + y + " " + z + " " + objid + " " + mas);
                 sh.Add(new Circle(double.Parse(f), double.Parse(g), double.Parse(cr)));
-
-                #region commented 
-                //int j = 0;
-                //while (s[i][j] == ' ')
-                //{
-                //    j++;
-                //}
-                //int k = j;
-                //while (s[i][k] != ' ')
-                //{
-                //    k++;
-                //}
-                //string f = s[i].Substring(j, k - j);
-                //j = k;
-                //while (s[i][j] == ' ')
-                //{
-                //    j++;
-                //    k++;
-                //}
-                //while (s[i][k] != ' ')
-                //{
-                //    k++;
-                //}
-                //string g = s[i].Substring(j, k - j);
-                //j = k;
-                //while (s[i][j] == ' ')
-                //{
-                //    j++;
-                //    k++;
-                //}
-                //while (s[i][k] != ' ')
-                //{
-                //    k++;
-                //}
-                //string cr = s[i].Substring(j, k - j);
-                //j = k;
-                //while (s[i][j] == ' ')
-                //{
-                //    j++;
-                //    k++;
-                //}
-                //while (s[i][k] != ' ')
-                //{
-                //    k++;
-                //}
-                //string objid = s[i].Substring(j, k - j);
-                //j = k;
-                //while (s[i][j] == ' ')
-                //{
-                //    j++;
-                //    k++;
-                //}
-                //while (k < s[i].Length && s[i][k] != ' ')
-                //{
-                //    k++;
-                //}
-                //string mas = s[i].Substring(j, k - j);
-                //double r = 300000.0 / 66.93 * double.Parse(cr);
-                //double x = r * System.Math.Cos(double.Parse(g) * System.Math.PI / 180.0) * System.Math.Cos(double.Parse(f) * System.Math.PI / 180.0);
-                //double y = r * System.Math.Cos(double.Parse(g) * System.Math.PI / 180.0) * System.Math.Sin(double.Parse(f) * System.Math.PI / 180.0);
-                //double z = r * System.Math.Sin(double.Parse(g) * System.Math.PI / 180.0);
-
-                //double x, y, z;
-                //get_values_from_string(s[i], out x, out y, out z);
-                //sw.WriteLine(x + " " + y + " " + z + " " + objid + " " + mas);
-                //sh.Add(new Circle(double.Parse(f), double.Parse(g), double.Parse(cr)));
+                */
                 #endregion
             }
             sw.Close();
@@ -1081,7 +1085,7 @@ namespace Galaxies
             }
             Cut_lines();
             Make_file();*/
-            pictureBox1.Refresh();
+                pictureBox1.Refresh();
         }
 
         Point3D Center() //Finding center of masses 
