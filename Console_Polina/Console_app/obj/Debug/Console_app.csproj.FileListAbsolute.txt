@@ -1,0 +1,6 @@
+C:\Users\User\Documents\New_github\Galaxies-master\Console_Polina\Console_app\bin\Debug\Console_app.exe.config
+C:\Users\User\Documents\New_github\Galaxies-master\Console_Polina\Console_app\bin\Debug\Console_app.exe
+C:\Users\User\Documents\New_github\Galaxies-master\Console_Polina\Console_app\bin\Debug\Console_app.pdb
+C:\Users\User\Documents\New_github\Galaxies-master\Console_Polina\Console_app\obj\Debug\Console_app.csprojResolveAssemblyReference.cache
+C:\Users\User\Documents\New_github\Galaxies-master\Console_Polina\Console_app\obj\Debug\Console_app.exe
+C:\Users\User\Documents\New_github\Galaxies-master\Console_Polina\Console_app\obj\Debug\Console_app.pdb
