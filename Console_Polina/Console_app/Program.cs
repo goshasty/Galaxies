@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Console_app
 {
@@ -27,9 +28,15 @@ namespace Console_app
             for(int i = first; i <= last; i++)
             {
                 string t = start + "Abell_" + i + " less 0.3 chosen.txt";
-                Cluster cluster = new Cluster(t);
-                cluster.Finding_clusters();
-                Console.WriteLine("Анализ файла ", t, " закончен.");
+                if (File.Exists(t))
+                {
+                    Cluster cluster = new Cluster(t);
+                    cluster.Finding_clusters();
+                    Console.WriteLine();
+                    Console.WriteLine("Анализ файла " + t + " закончен.");
+                    Console.WriteLine();
+                    Console.WriteLine();
+                }
             }
         }
     }
