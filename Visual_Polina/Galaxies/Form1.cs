@@ -1470,7 +1470,7 @@ namespace Galaxies
             System.IO.File.Delete(file_name);
             StreamWriter sw = new StreamWriter(file_name);
             int sum = 0;
-            double ra = 0, dec = 0, z = 0, sum_mass = 0;
+            double ra = 0, dec = 0, z = 0, sum_mass = 0, sum_m = 0;
             for (int j = 0; j < sh.Count; j++)
             {
                 if (sh[j].Draw_Line)
@@ -1490,6 +1490,7 @@ namespace Galaxies
                     dec += sh[sh[j].Next_index].Dec * sh[sh[j].Next_index].Brightness;
                     z += sh[sh[j].Next_index].Redshift * sh[sh[j].Next_index].Brightness;
                     sum_mass += sh[j].Brightness;
+                    sum_m += sh[j].Mass;
                 }
             }
             ra /= sum_mass;
@@ -1498,8 +1499,17 @@ namespace Galaxies
             sw.WriteLine(sum);
             sw.WriteLine(ra + " " + dec + " " + z);
             sw.WriteLine();
-            sum = 0;
             sw.Close();
+            string[] f = file_name.Split('\\');
+            string t = "";
+            for(int i = 0; i < f.Length - 1; i++)
+            {
+                t += f[i] + '\\';
+            }
+            StreamWriter cl = new StreamWriter(t + "Clusters.txt", true);
+            cl.WriteLine(ra + " " + dec + " " + z + " " + sum_m / sum);
+            cl.Close();
+            sum = 0;
         }
 
         private void button_next_algorithm_Click(object sender, EventArgs e)

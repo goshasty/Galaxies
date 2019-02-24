@@ -24,20 +24,22 @@ namespace Console_app
             string first_str = extract.Remove(extract.IndexOf(" less 0.3 chosen"));
             int first = int.Parse(first_str);
             Console.WriteLine("Ввести номер последнего файла: ");
-            int last = int.Parse(Console.ReadLine());
+            int last = int.Parse(Console.ReadLine()); 
+            StreamWriter cl = new StreamWriter(start + "Clusters.txt");
             for(int i = first; i <= last; i++)
             {
                 string t = start + "Abell_" + i + " less 0.3 chosen.txt";
                 if (File.Exists(t))
                 {
                     Cluster cluster = new Cluster(t);
-                    cluster.Finding_clusters();
+                    cluster.Finding_clusters(cl);
                     Console.WriteLine();
                     Console.WriteLine("Анализ файла " + t + " закончен.");
                     Console.WriteLine();
                     Console.WriteLine();
                 }
             }
+            cl.Close();
         }
     }
 }

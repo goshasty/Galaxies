@@ -49,7 +49,7 @@ namespace Console_app
             file0 = file;
         }
 
-        public void Finding_clusters()
+        public void Finding_clusters(StreamWriter cl)
         {
             Change_coordinates();
             FillDate(file);
@@ -155,7 +155,7 @@ namespace Console_app
             {
                 Next_algorithm();
             }
-            Make_final_file(file0.Substring(0, file0.Length - 4) + "_Clusters.txt");
+            Make_final_file(file0.Substring(0, file0.Length - 4) + "_Clusters.txt", cl);
             /*switch (variant)
             {
                 case 0: Algorytm_of_neighbour(); break;
@@ -1253,12 +1253,12 @@ namespace Console_app
             sw.Close();
         }
 
-        private void Make_final_file(string file_name)
+        private void Make_final_file(string file_name, StreamWriter cl)
         {
             System.IO.File.Delete(file_name);
             StreamWriter sw = new StreamWriter(file_name);
             int sum = 0;
-            double ra = 0, dec = 0, z = 0, sum_mass = 0;
+            double ra = 0, dec = 0, z = 0, sum_mass = 0, sum_m = 0;
             for (int j = 0; j < sh.Count; j++)
             {
                 if (sh[j].Draw_Line)
@@ -1278,6 +1278,7 @@ namespace Console_app
                     dec += sh[sh[j].Next_index].Dec * sh[sh[j].Next_index].Brightness;
                     z += sh[sh[j].Next_index].Redshift * sh[sh[j].Next_index].Brightness;
                     sum_mass += sh[j].Brightness;
+                    sum_m += sh[j].Mass;
                 }
             }
             ra /= sum_mass;
@@ -1286,8 +1287,9 @@ namespace Console_app
             sw.WriteLine(sum);
             sw.WriteLine(ra + " " + dec + " " + z);
             sw.WriteLine();
-            sum = 0;
             sw.Close();
+            cl.WriteLine(ra + " " + dec + " " + z + " " + sum_m / sum);
+            sum = 0;
         }
     }
 
