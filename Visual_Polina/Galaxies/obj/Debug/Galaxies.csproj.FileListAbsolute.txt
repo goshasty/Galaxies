@@ -1,0 +1,9 @@
+C:\Users\User\Documents\New_github\Galaxies-master\Visual_Polina\Galaxies\bin\Debug\Galaxies.exe.config
+C:\Users\User\Documents\New_github\Galaxies-master\Visual_Polina\Galaxies\bin\Debug\Galaxies.exe
+C:\Users\User\Documents\New_github\Galaxies-master\Visual_Polina\Galaxies\bin\Debug\Galaxies.pdb
+C:\Users\User\Documents\New_github\Galaxies-master\Visual_Polina\Galaxies\obj\Debug\Galaxies.csprojResolveAssemblyReference.cache
+C:\Users\User\Documents\New_github\Galaxies-master\Visual_Polina\Galaxies\obj\Debug\Galaxies.Form1.resources
+C:\Users\User\Documents\New_github\Galaxies-master\Visual_Polina\Galaxies\obj\Debug\Galaxies.Properties.Resources.resources
+C:\Users\User\Documents\New_github\Galaxies-master\Visual_Polina\Galaxies\obj\Debug\Galaxies.csproj.GenerateResource.Cache
+C:\Users\User\Documents\New_github\Galaxies-master\Visual_Polina\Galaxies\obj\Debug\Galaxies.exe
+C:\Users\User\Documents\New_github\Galaxies-master\Visual_Polina\Galaxies\obj\Debug\Galaxies.pdb

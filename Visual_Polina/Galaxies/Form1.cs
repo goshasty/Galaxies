@@ -257,6 +257,7 @@ namespace Galaxies
                 sh[i].Z = z;
                 sh[i].Objid = id;
                 sh[i].Mass = mass;
+                sh[i].Brightness = 2.54 * Math.Pow(10, -6) * Math.Pow(10, 0.4 * (0 - sh[i].Mass));
             }
             for (int i = 0; i < sh.Count; i++)
             {
@@ -1373,12 +1374,12 @@ namespace Galaxies
             {
                 if(sh[j].Number_of_cluster == ind)
                 {
-                    center_z += sh[j].Redshift * sh[j].Mass;
+                    center_z += sh[j].Redshift * sh[j].Brightness;
                     count++;
                 }
                 if(sh[j].Number_of_cluster == ind1)
                 {
-                    center_z_1 += sh[j].Redshift * sh[j].Mass;
+                    center_z_1 += sh[j].Redshift * sh[j].Brightness;
                     count_1++;
                 }
             }
@@ -1447,10 +1448,10 @@ namespace Galaxies
                     {
                         sw.WriteLine(sh[j].Objid + "   " + sh[j].Ra + "   " + sh[j].Dec + "   " + sh[j].Redshift + "   " + sh[j].Mass);
                         sum++;
-                        ra += sh[j].Ra * sh[j].Mass;
-                        dec += sh[j].Dec * sh[j].Mass;
-                        z += sh[j].Redshift * sh[j].Mass;
-                        sum_mass += sh[j].Mass;
+                        ra += sh[j].Ra * sh[j].Brightness;
+                        dec += sh[j].Dec * sh[j].Brightness;
+                        z += sh[j].Redshift * sh[j].Brightness;
+                        sum_mass += sh[j].Brightness;
                     }
                 }
                 ra /= sum_mass;
@@ -1478,17 +1479,17 @@ namespace Galaxies
                     {
                         sw.WriteLine(sh[j].Objid + "   " + sh[j].Ra + "   " + sh[j].Dec + "   " + sh[j].Redshift + "   " + sh[j].Mass);
                         sum++;
-                        ra += sh[j].Ra * sh[j].Mass;
-                        dec += sh[j].Dec * sh[j].Mass;
-                        z += sh[j].Redshift * sh[j].Mass;
-                        sum_mass += sh[j].Mass;
+                        ra += sh[j].Ra * sh[j].Brightness;
+                        dec += sh[j].Dec * sh[j].Brightness;
+                        z += sh[j].Redshift * sh[j].Brightness;
+                        sum_mass += sh[j].Brightness;
                     }
                     sw.WriteLine(sh[sh[j].Next_index].Objid + "   " + sh[sh[j].Next_index].Ra + "   " + sh[sh[j].Next_index].Dec + "   " + sh[sh[j].Next_index].Redshift + "   " + sh[sh[j].Next_index].Mass);
                     sum++;
-                    ra += sh[sh[j].Next_index].Ra * sh[sh[j].Next_index].Mass;
-                    dec += sh[sh[j].Next_index].Dec * sh[sh[j].Next_index].Mass;
-                    z += sh[sh[j].Next_index].Redshift * sh[sh[j].Next_index].Mass;
-                    sum_mass += sh[j].Mass;
+                    ra += sh[sh[j].Next_index].Ra * sh[sh[j].Next_index].Brightness;
+                    dec += sh[sh[j].Next_index].Dec * sh[sh[j].Next_index].Brightness;
+                    z += sh[sh[j].Next_index].Redshift * sh[sh[j].Next_index].Brightness;
+                    sum_mass += sh[j].Brightness;
                 }
             }
             ra /= sum_mass;

@@ -40,6 +40,7 @@ namespace Console_app
         public bool algorythmed { get { return Algorythmed; } set { Algorythmed = value; } }
         public int ind_min = -1, ind_max = -1;
         public double[] parameters = { 0.35, 0.35, 0.35, 0.35 };
+        double Merge_parameter = 0.05;
 
         public Cluster(string file)
         {
@@ -397,6 +398,7 @@ namespace Console_app
                 sh[i].Z = z;
                 sh[i].Objid = id;
                 sh[i].Mass = mass;
+                sh[i].Brightness = 2.54 * Math.Pow(10, -6) * Math.Pow(10, 0.4 * (0 - sh[i].Mass));
             }
             for (int i = 0; i < sh.Count; i++)
             {
@@ -1155,11 +1157,41 @@ namespace Console_app
                     sum++;
                 }
             }
+
+            double center_z = 0, center_z_1 = 0, count = 0, count_1 = 0;
             for (int j = 0; j < sh.Count; j++)
             {
-                if (sh[j].Number_of_cluster == ind || sh[j].Number_of_cluster == ind1)
+                if (sh[j].Number_of_cluster == ind)
                 {
-                    sw.WriteLine(sh[j].Objid);
+                    center_z += sh[j].Redshift * sh[j].Brightness;
+                    count++;
+                }
+                if (sh[j].Number_of_cluster == ind1)
+                {
+                    center_z_1 += sh[j].Redshift * sh[j].Brightness;
+                    count_1++;
+                }
+            }
+            center_z = center_z / count;
+            center_z_1 = center_z_1 / count_1;
+            if (Math.Abs(center_z_1 - center_z) <= Merge_parameter)
+            {
+                for (int j = 0; j < sh.Count; j++)
+                {
+                    if (sh[j].Number_of_cluster == ind || sh[j].Number_of_cluster == ind1)
+                    {
+                        sw.WriteLine(sh[j].Objid);
+                    }
+                }
+            }
+            else
+            {
+                for (int j = 0; j < sh.Count; j++)
+                {
+                    if (sh[j].Number_of_cluster == ind)
+                    {
+                        sw.WriteLine(sh[j].Objid);
+                    }
                 }
             }
             sum = 0;
@@ -1204,10 +1236,10 @@ namespace Console_app
                     {
                         sw.WriteLine(sh[j].Objid + "   " + sh[j].Ra + "   " + sh[j].Dec + "   " + sh[j].Redshift + "   " + sh[j].Mass);
                         sum++;
-                        ra += sh[j].Ra * sh[j].Mass;
-                        dec += sh[j].Dec * sh[j].Mass;
-                        z += sh[j].Redshift * sh[j].Mass;
-                        sum_mass += sh[j].Mass;
+                        ra += sh[j].Ra * sh[j].Brightness;
+                        dec += sh[j].Dec * sh[j].Brightness;
+                        z += sh[j].Redshift * sh[j].Brightness;
+                        sum_mass += sh[j].Brightness;
                     }
                 }
                 ra /= sum_mass;
@@ -1235,17 +1267,17 @@ namespace Console_app
                     {
                         sw.WriteLine(sh[j].Objid + "   " + sh[j].Ra + "   " + sh[j].Dec + "   " + sh[j].Redshift + "   " + sh[j].Mass);
                         sum++;
-                        ra += sh[j].Ra * sh[j].Mass;
-                        dec += sh[j].Dec * sh[j].Mass;
-                        z += sh[j].Redshift * sh[j].Mass;
-                        sum_mass += sh[j].Mass;
+                        ra += sh[j].Ra * sh[j].Brightness;
+                        dec += sh[j].Dec * sh[j].Brightness;
+                        z += sh[j].Redshift * sh[j].Brightness;
+                        sum_mass += sh[j].Brightness;
                     }
                     sw.WriteLine(sh[sh[j].Next_index].Objid + "   " + sh[sh[j].Next_index].Ra + "   " + sh[sh[j].Next_index].Dec + "   " + sh[sh[j].Next_index].Redshift + "   " + sh[sh[j].Next_index].Mass);
                     sum++;
-                    ra += sh[sh[j].Next_index].Ra * sh[sh[j].Next_index].Mass;
-                    dec += sh[sh[j].Next_index].Dec * sh[sh[j].Next_index].Mass;
-                    z += sh[sh[j].Next_index].Redshift * sh[sh[j].Next_index].Mass;
-                    sum_mass += sh[j].Mass;
+                    ra += sh[sh[j].Next_index].Ra * sh[sh[j].Next_index].Brightness;
+                    dec += sh[sh[j].Next_index].Dec * sh[sh[j].Next_index].Brightness;
+                    z += sh[sh[j].Next_index].Redshift * sh[sh[j].Next_index].Brightness;
+                    sum_mass += sh[j].Brightness;
                 }
             }
             ra /= sum_mass;
@@ -1576,6 +1608,8 @@ namespace Console_app
         public int Number_of_cluster { get { return number_of_cluster; } set { number_of_cluster = value; } }
         protected double mass;
         public double Mass { get { return mass; } set { mass = value; } }
+        protected double brightness;
+        public double Brightness { get { return brightness; } set { brightness = value; } }
         protected double ra, dec, redshift;
         public double Ra { get { return ra; } set { ra = value; } }
         public double Dec { get { return dec; } set { dec = value; } }

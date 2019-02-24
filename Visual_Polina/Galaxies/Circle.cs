@@ -35,6 +35,8 @@ namespace Galaxies
         public int Number_of_cluster { get { return number_of_cluster; } set { number_of_cluster = value; } }
         protected double mass;
         public double Mass { get { return mass; } set { mass = value; } }
+        protected double brightness;
+        public double Brightness { get { return brightness; } set { brightness = value; } }
         protected double ra, dec, redshift;
         public double Ra { get { return ra; } set { ra = value; } }
         public double Dec { get { return dec; } set { dec = value; } }
