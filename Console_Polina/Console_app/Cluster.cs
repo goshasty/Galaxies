@@ -40,7 +40,7 @@ namespace Console_app
         public bool algorythmed { get { return Algorythmed; } set { Algorythmed = value; } }
         public int ind_min = -1, ind_max = -1;
         public double[] parameters = { 0.1, 0.001, 0.06, 0.08 };
-        double Merge_parameter = 0.05;
+        double Merge_parameter = 0.01;
 
         public Cluster(string file)
         {
