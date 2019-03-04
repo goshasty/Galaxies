@@ -7,3 +7,12 @@ C:\Users\User\Documents\New_github\Galaxies-master\Visual_Polina\Galaxies\obj\De
 C:\Users\User\Documents\New_github\Galaxies-master\Visual_Polina\Galaxies\obj\Debug\Galaxies.csproj.GenerateResource.Cache
 C:\Users\User\Documents\New_github\Galaxies-master\Visual_Polina\Galaxies\obj\Debug\Galaxies.exe
 C:\Users\User\Documents\New_github\Galaxies-master\Visual_Polina\Galaxies\obj\Debug\Galaxies.pdb
+D:\MyProjects\Galaxies-master\Visual_Polina\Galaxies\bin\Debug\Galaxies.exe.config
+D:\MyProjects\Galaxies-master\Visual_Polina\Galaxies\obj\Debug\Galaxies.exe
+D:\MyProjects\Galaxies-master\Visual_Polina\Galaxies\obj\Debug\Galaxies.pdb
+D:\MyProjects\Galaxies-master\Visual_Polina\Galaxies\bin\Debug\Galaxies.exe
+D:\MyProjects\Galaxies-master\Visual_Polina\Galaxies\bin\Debug\Galaxies.pdb
+D:\MyProjects\Galaxies-master\Visual_Polina\Galaxies\obj\Debug\Galaxies.csprojResolveAssemblyReference.cache
+D:\MyProjects\Galaxies-master\Visual_Polina\Galaxies\obj\Debug\Galaxies.Form1.resources
+D:\MyProjects\Galaxies-master\Visual_Polina\Galaxies\obj\Debug\Galaxies.Properties.Resources.resources
+D:\MyProjects\Galaxies-master\Visual_Polina\Galaxies\obj\Debug\Galaxies.csproj.GenerateResource.Cache

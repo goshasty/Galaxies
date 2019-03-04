@@ -25,7 +25,7 @@ namespace Galaxies
         bool algorythmed = false;
         int ind_min = -1, ind_max = -1;
         double[] parameters = { 0.1, 0.001, 0.06, 0.08 };
-        double Merge_parameter = 0.05;
+        double Merge_parameter = 0.005;
 
         public Form1()
         {
@@ -66,11 +66,16 @@ namespace Galaxies
             {
 
                 string[] values = s[i].Split('\t');
-                string ra = values[0].Replace('.', ','); // f
+                /*string ra = values[0].Replace('.', ','); // f
                 string dec = values[1].Replace('.', ','); // g
                 string red_shift = values[2].Replace('.', ',');
                 string objid = values[3].Replace('.', ',');
-                string mas = values[4].Replace('.', ',');
+                string mas = values[4].Replace('.', ',');*/
+                string ra = values[0].Replace('.', '.'); // f
+                string dec = values[1].Replace('.', '.'); // g
+                string red_shift = values[2].Replace('.', '.');
+                string objid = values[3].Replace('.', '.');
+                string mas = values[4].Replace('.', '.');
 
                 double r = 300000.0 / 66.93 * double.Parse(red_shift);
 
@@ -1370,21 +1375,24 @@ namespace Galaxies
                 }
             }
             double center_z = 0, center_z_1 = 0, count = 0, count_1 = 0;
+            double bs = 0, bs1 = 0;
             for(int j = 0; j < sh.Count; j++)
             {
                 if(sh[j].Number_of_cluster == ind)
                 {
                     center_z += sh[j].Redshift * sh[j].Brightness;
+                    bs += sh[j].Brightness;
                     count++;
                 }
                 if(sh[j].Number_of_cluster == ind1)
                 {
                     center_z_1 += sh[j].Redshift * sh[j].Brightness;
+                    bs1 += sh[j].Brightness;
                     count_1++;
                 }
             }
-            center_z = center_z / count;
-            center_z_1 = center_z_1 / count_1;
+            center_z = center_z / bs;
+            center_z_1 = center_z_1 / bs1;
             if (Math.Abs(center_z_1 - center_z) <= Merge_parameter)
             {
                 for (int j = 0; j < sh.Count; j++)

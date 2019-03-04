@@ -39,7 +39,7 @@ namespace Console_app
         protected bool Algorythmed = false;
         public bool algorythmed { get { return Algorythmed; } set { Algorythmed = value; } }
         public int ind_min = -1, ind_max = -1;
-        public double[] parameters = { 0.35, 0.35, 0.35, 0.35 };
+        public double[] parameters = { 0.1, 0.001, 0.06, 0.08 };
         double Merge_parameter = 0.05;
 
         public Cluster(string file)
@@ -154,6 +154,66 @@ namespace Console_app
             while (variant <= 5)
             {
                 Next_algorithm();
+            } 
+            List<string> s = System.IO.File.ReadAllLines(file0.Substring(0, file0.Length - 4) + "_сluster_0.txt").ToList<string>();
+            s.AddRange(System.IO.File.ReadAllLines(file0.Substring(0, file0.Length - 4) + "_сluster_1.txt"));
+            s.AddRange(System.IO.File.ReadAllLines(file0.Substring(0, file0.Length - 4) + "_сluster_2.txt"));
+            s.AddRange(System.IO.File.ReadAllLines(file0.Substring(0, file0.Length - 4) + "_сluster_3.txt"));
+            s.AddRange(System.IO.File.ReadAllLines(file0.Substring(0, file0.Length - 4) + "_сluster_4.txt"));
+            s.AddRange(System.IO.File.ReadAllLines(file0.Substring(0, file0.Length - 4) + "_сluster_5.txt"));
+            s.Sort();
+            for (int i = 0; i < s.Count; i++)
+            {
+                int j = 0;
+                while (j < s[i].Length && s[i][j] != ' ') { j++; }
+                s[i] = s[i].Substring(0, j);
+            }
+            StreamWriter sw = new StreamWriter(file0.Substring(0, file0.Length - 4) + "_сluster.txt");
+            int ssum = 0;
+            for (int i = 1; i < s.Count; i++)
+            {
+                if (s[i] == s[i - 1])
+                {
+                    ssum++;
+                }
+                else
+                {
+                    if (ssum >= 2)
+                    {
+                        sw.WriteLine(s[i - 1]);
+                    }
+                    ssum = 0;
+                }
+            }
+            if (ssum >= 2)
+            {
+                sw.WriteLine(s[s.Count - 1]);
+            }
+            s.Clear();
+            sw.Close();
+            string[] ss = System.IO.File.ReadAllLines(file0.Substring(0, file0.Length - 4) + "_сluster.txt");
+            for (int j = 0; j < sh.Count; j++)
+            {
+                sh[j].Draw_Line = false;
+                sh[j].Next_index = -1;
+            }
+            int iind = -1;
+            for (int i = 0; i < ss.Length; i++)
+            {
+                for (int j = 0; j < sh.Count; j++)
+                {
+                    if (ss[i] == sh[j].Objid)
+                    {
+                        if (iind == -1) iind = j;
+                        else
+                        {
+                            sh[iind].Next_index = j;
+                            sh[iind].Draw_Line = true;
+                            iind = j;
+                        }
+                        break;
+                    }
+                }
             }
             Make_final_file(file0.Substring(0, file0.Length - 4) + "_Clusters.txt", cl);
             /*switch (variant)
@@ -210,11 +270,16 @@ namespace Console_app
             for (int i = 1; i < s.Length; i++)
             {
                 string[] values = s[i].Split('\t');
-                string ra = values[0].Replace('.', ','); // f
+                /*string ra = values[0].Replace('.', ','); // f
                 string dec = values[1].Replace('.', ','); // g
                 string red_shift = values[2].Replace('.', ',');
                 string objid = values[3].Replace('.', ',');
-                string mas = values[4].Replace('.', ',');
+                string mas = values[4].Replace('.', ',');*/
+                string ra = values[0].Replace('.', '.'); // f
+                string dec = values[1].Replace('.', '.'); // g
+                string red_shift = values[2].Replace('.', '.');
+                string objid = values[3].Replace('.', '.');
+                string mas = values[4].Replace('.', '.');
 
                 double r = 300000.0 / 66.93 * double.Parse(red_shift);
 
@@ -1159,21 +1224,24 @@ namespace Console_app
             }
 
             double center_z = 0, center_z_1 = 0, count = 0, count_1 = 0;
+            double bs = 0, bs1 = 0;
             for (int j = 0; j < sh.Count; j++)
             {
                 if (sh[j].Number_of_cluster == ind)
                 {
                     center_z += sh[j].Redshift * sh[j].Brightness;
+                    bs += sh[j].Brightness;
                     count++;
                 }
                 if (sh[j].Number_of_cluster == ind1)
                 {
                     center_z_1 += sh[j].Redshift * sh[j].Brightness;
+                    bs1 += sh[j].Brightness;
                     count_1++;
                 }
             }
-            center_z = center_z / count;
-            center_z_1 = center_z_1 / count_1;
+            center_z = center_z / bs;
+            center_z_1 = center_z_1 / bs1;
             if (Math.Abs(center_z_1 - center_z) <= Merge_parameter)
             {
                 for (int j = 0; j < sh.Count; j++)
