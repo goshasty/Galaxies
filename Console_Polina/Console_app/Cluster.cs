@@ -240,21 +240,21 @@ namespace Console_app
                 }
                 switch (variant)
                 {
-                    case 0: { Console.WriteLine("Алгоритм ближайшего соседа. \n Начало"); Algorytm_of_neighbour(); Console.WriteLine(" Конец"); } break;
-                    case 1: { Console.WriteLine("Метод ветвей и границ. \n Начало"); Method_of_branches_and_borders(); Console.WriteLine(" Конец"); } break;
-                    case 2: { Console.WriteLine("Алгорит Дейкстры. \n Начало"); Algorythm_of_Dejkstra(); Console.WriteLine(" Конец"); } break;
-                    case 3: { Console.WriteLine("Метод локальных улучшений. \n Начало"); Method_of_local_improvement(); Console.WriteLine(" Конец"); } break;
+                    case 0: { Console.WriteLine("Algorithm of closest neighbour. \n Start"); Algorytm_of_neighbour(); Console.WriteLine(" Finish"); } break;
+                    case 1: { Console.WriteLine("Method of branches and borders. \n Start"); Method_of_branches_and_borders(); Console.WriteLine(" Finish"); } break;
+                    case 2: { Console.WriteLine("Algorithm of Dejkstra (modified). \n Start"); Algorythm_of_Dejkstra(); Console.WriteLine(" Finish"); } break;
+                    case 3: { Console.WriteLine("Method of local improvements. \n Start"); Method_of_local_improvement(); Console.WriteLine(" Finish"); } break;
                     case 4:
                         {
-                            Console.WriteLine("Муравьиный алгоритм. \n Начало");
+                            Console.WriteLine("Ant algorithm. \n Start");
 
                             belongMatrixAntAlgorithm = Ant_algorithm();
 
-                            Console.WriteLine(" Конец");
+                            Console.WriteLine(" Finish");
 
                         }
                         break;
-                    case 5: { Console.WriteLine("Метод К средних. \n Начало"); Method_K_average(); Console.WriteLine(" Конец"); } break;
+                    case 5: { Console.WriteLine("Method of K average. \n Start"); Method_K_average(); Console.WriteLine(" Finish"); } break;
                 }
                 Cut_lines();
                 Make_file();

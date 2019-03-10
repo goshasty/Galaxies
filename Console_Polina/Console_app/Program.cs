@@ -11,7 +11,7 @@ namespace Console_app
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Ввести полный адрес начального файла с данными: ");
+            Console.WriteLine("Enter full name of an initial file of data: ");
             string extract = Console.ReadLine();
             string[] extr = extract.Split('\\');
             string start = "";
@@ -23,7 +23,7 @@ namespace Console_app
             extract = extract.Remove(0, 6);
             string first_str = extract.Remove(extract.IndexOf(" less 0.3 chosen"));
             int first = int.Parse(first_str);
-            Console.WriteLine("Ввести номер последнего файла: ");
+            Console.WriteLine("Enter the number of the last file: ");
             int last = int.Parse(Console.ReadLine()); 
             StreamWriter cl = new StreamWriter(start + "Clusters.txt");
             for(int i = first; i <= last; i++)
@@ -34,7 +34,7 @@ namespace Console_app
                     Cluster cluster = new Cluster(t);
                     cluster.Finding_clusters(cl);
                     Console.WriteLine();
-                    Console.WriteLine("Анализ файла " + t + " закончен.");
+                    Console.WriteLine("Analysis of file " + t + " is ended.");
                     Console.WriteLine();
                     Console.WriteLine();
                 }
