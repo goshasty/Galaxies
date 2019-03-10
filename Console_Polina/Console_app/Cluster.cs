@@ -270,16 +270,16 @@ namespace Console_app
             for (int i = 1; i < s.Length; i++)
             {
                 string[] values = s[i].Split('\t');
-                /*string ra = values[0].Replace('.', ','); // f
+                string ra = values[0].Replace('.', ','); // f
                 string dec = values[1].Replace('.', ','); // g
                 string red_shift = values[2].Replace('.', ',');
                 string objid = values[3].Replace('.', ',');
-                string mas = values[4].Replace('.', ',');*/
-                string ra = values[0].Replace('.', '.'); // f
+                string mas = values[4].Replace('.', ',');
+                /*string ra = values[0].Replace('.', '.'); // f
                 string dec = values[1].Replace('.', '.'); // g
                 string red_shift = values[2].Replace('.', '.');
                 string objid = values[3].Replace('.', '.');
-                string mas = values[4].Replace('.', '.');
+                string mas = values[4].Replace('.', '.');*/
 
                 double r = 300000.0 / 66.93 * double.Parse(red_shift);
 
